@@ -342,6 +342,158 @@ public class Program {
 					System.out.println();
 					break;
 					
+				case 4: 
+					System.out.println("Projeto");
+					System.out.println();
+					projeto = usuario.getProjetoVinculado();
+					int opt2 = 1;
+					while(opt2 != 0) {
+						System.out.printf("[1] VISUALIZAR INFORMACOES DO PROJETO\n"
+								+ "[2] EDITAR PROJETO\n"
+								+ "[3] NOVA ATIVIDADE\n"
+								+ "[4] APAGAR PROJETO\n"
+								+ "[5] VISUALIZAR ATIVIDADES\n"
+								+ "[6] ADD MEMBROS\n"
+								+ "[7] RELATORIO\n"
+								+ "[8] RETORNAR PARA PAGINA ANTERIOR\n");
+						int optcase = sc.nextInt();
+						switch(optcase) {
+						case 1:
+							System.out.printf("ID: %s\n", projeto.getId());
+							System.out.printf("\nDESCRICAO: %s\n\n", projeto.getDescricao());
+							System.out.printf("DATA DE INICIO: %s, HORA DE INICIO: %s\n", projeto.getDataComeco(), projeto.getHoraComeco());
+							System.out.printf("DATA DE TERMINO: %s, HORA DE TERMINO: %s\n", projeto.getDataFim(), projeto.getHoraFim());
+							System.out.printf("COORDENADOR: %s\n", projeto.getCoordenador().getNome());
+							System.out.printf("STATUS DO PROJETO: %s\n", projeto.getStatus());
+							break;
+						
+						case 2: // editar projeto #####################################################################################################
+							System.out.printf("EDITAR PROJETO\n");
+							int opt3 = 1;
+							while(opt3 != 0) {
+								System.out.printf("[1] EDITAR ID\n"
+										+ "[2] EDITAR DESCRICAO\n"
+										+ "[3] EDITAR DATA DO INICIO\n"
+										+ "[4] EDITAR DATA DO FIM\n"
+										+ "[5] EDITAR HORA DO INICIO\n"
+										+ "[6] EDITAR HORA DO FIM\n"
+										+ "[7] EDITAR BOLSA\n"
+										+ "[8] EDITAR STATUS\n"
+										+ "[9] RETORNAR PARA PAGINA ANTERIOR\n");
+								int optcase3 = sc.nextInt();
+								switch(optcase3) {
+									case 1:
+										System.out.println("DIGITE O NOVO ID:");
+										sc.nextLine();
+										String novoId = sc.nextLine();
+										projeto.setId(novoId);
+										System.out.println("ALTERACAO REALIZADA COM SUCESSO");
+										break;
+										
+									case 2:
+										System.out.println("DIGITE UMA NOVA DESCRICAO:");
+										sc.nextLine();
+										String novoDescricao = sc.nextLine();
+										projeto.setDescricao(novoDescricao);
+										System.out.println("ALTERACAO REALIZADA COM SUCESSO");
+										break;
+										
+									case 3:
+										System.out.println("DIGITE UMA NOVA DATA DE INICIO:");
+										sc.nextLine();
+										String novaDataInicio = sc.nextLine();
+										projeto.setDataComeco(novaDataInicio);
+										System.out.println("ALTERACAO REALIZADA COM SUCESSO");
+										break;
+										
+									case 4:
+										System.out.println("DIGITE UMA NOVA DATA DE FIM:");
+										sc.nextLine();
+										String novaDataFim = sc.nextLine();
+										projeto.setDataFim(novaDataFim);
+										System.out.println("ALTERACAO REALIZADA COM SUCESSO");
+										break;
+										
+									case 5:
+										System.out.println("DIGITE UMA NOVA HORA DE INICIO:");
+										sc.nextLine();
+										String novaHoraInicio = sc.nextLine();
+										projeto.setHoraComeco(novaHoraInicio);
+										System.out.println("ALTERACAO REALIZADA COM SUCESSO");
+										break;
+										
+									case 6:
+										System.out.println("DIGITE UMA NOVA HORA DE FIM:");
+										sc.nextLine();
+										String novaHoraFim = sc.nextLine();
+										projeto.setHoraFim(novaHoraFim);
+										System.out.println("ALTERACAO REALIZADA COM SUCESSO");
+										break;
+										
+									case 7:
+										System.out.println("DIGITE O NOVO VALOR DA BOLSA:");
+										double novaBolsa = sc.nextDouble();
+										projeto.setValorBolsa(novaBolsa);
+										System.out.println("ALTERACAO REALIZADA COM SUCESSO");
+										break;
+										
+									case 8:
+										System.out.println("ALTERE O STATUS:");
+										System.out.printf("[1] EM PROCESSO DE CRIACAO\n"
+												+ "[2] INICIADO\n"
+												+ "[3] EM ANDAMENTO\n"
+												+ "[4] CONCLUIDO\n");
+										int var = sc.nextInt();
+										if(var == 1) {
+											projeto.setStatus("EM PROCESSO DE CRIACAO");
+										}
+										else if(var == 2) {
+											projeto.setStatus("INICIADO");
+										}
+										else if(var == 3) {
+											projeto.setStatus("EM ANDAMENTO");
+										}
+										else if(var == 4) {
+											projeto.setStatus("CONCLUIDO");
+										}
+										break;
+										
+									case 9:
+										opt3 = 0;
+										break;
+								}
+							}
+							
+							break; // fim de editar projeto #########################################################################################
+							
+						case 3:
+							;
+							break;
+							
+						case 4:
+							break;
+							
+						case 5:
+							break;
+							
+						case 6:
+							break;
+							
+						case 7:
+							break;
+							
+						case 8:
+							opt2 = 0;
+							break;
+						}
+					
+						
+					}
+					
+					
+					
+					break;
+					
 							
 				}
 				

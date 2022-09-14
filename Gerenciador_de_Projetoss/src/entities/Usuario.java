@@ -7,7 +7,8 @@ public class Usuario {
 	private String nome;
 	private String funcao;
 	boolean ehCoordenador;
-	Projeto ehVinculadoProjeto;
+	boolean ehVinculadoProjeto;
+	Projeto projetoVinculado;
 	
 	public Usuario() {
 		
@@ -60,12 +61,22 @@ public class Usuario {
 		this.ehCoordenador = ehCoordenador;
 	}
 	
-	public Projeto EhVinculado() {
+	public boolean EhVinculado() {
 		return ehVinculadoProjeto;
 	}
 	
 	public void setEhVinculador(boolean ehVinculadoPorjeto) {
 		this.ehVinculadoProjeto = ehVinculadoProjeto;
 	}
+	
+	public Projeto getProjetoVinculado() {
+		return projetoVinculado;
+	}
+	
+	 public void setProjetoVinculado(Projeto projetoVinculado) {
+	        this.projetoVinculado.adcUsuario(this);
+	        setEhVinculador(true);
+	    }
+
 	
 }

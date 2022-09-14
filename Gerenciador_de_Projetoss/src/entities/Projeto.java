@@ -13,6 +13,7 @@ public class Projeto {
 	private ArrayList<Usuario> profissionaisDoProjeto;
 	private double valorBolsa;
 	private String periodoBolsa;
+	private String status;
 	
 	public Projeto() {
 		
@@ -28,6 +29,7 @@ public class Projeto {
 		this.horaFim = horaFim;
 		this.valorBolsa = valorBolsa;
 		profissionaisDoProjeto = new ArrayList<>();
+		this.status = "Em processo de criacao";
 	}
 
 	public String getId() {
@@ -90,7 +92,7 @@ public class Projeto {
     
     public void adcUsuario(Usuario usuario){
     	profissionaisDoProjeto.add(usuario);
-        usuario.ehVinculadoProjeto = this;
+        usuario.projetoVinculado = this;
     }
 
 	public ArrayList<Usuario> getProfissionaisDoProjeto() {
@@ -115,6 +117,14 @@ public class Projeto {
 
 	public void setPeriodoBolsa(String periodoBolsa) {
 		this.periodoBolsa = periodoBolsa;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	public String getStatus() {
+		return status;
 	}
 	
 	
