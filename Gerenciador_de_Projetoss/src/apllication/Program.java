@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
+import entities.Atividades;
 import entities.Projeto;
 import entities.Usuario;
 
@@ -19,6 +20,7 @@ public class Program {
 		List<Projeto> listProjeto = new ArrayList<Projeto>();
 		Projeto projeto = null;
 		Usuario usuario = null;
+		//Atividade atividade = null;
 		
 		int opcao = 1;
 		
@@ -113,7 +115,7 @@ public class Program {
 					System.out.println("LOGIN FEITO COM SUCESSO!");
 					System.out.println("");
 					usuario = buscaUsuario(eemail, listUsuario);
-					telaUsuario(usuario, projeto, listProjeto);
+					int voltei = telaUsuario(usuario, projeto, listProjeto, listUsuario);
 				}
 				else {
 					System.out.println("SENHA/EMAIL INCORRETOS");
@@ -184,10 +186,11 @@ public class Program {
 	
 	
 	//#####################            tela usuario           ##################################//
-	public static void telaUsuario(Usuario usuario, Projeto projeto, List<Projeto> listProjeto) {
+	public static int telaUsuario(Usuario usuario, Projeto projeto, List<Projeto> listProjeto, List<Usuario> listUsuario) {
 		System.out.println("### Ola, " + usuario.getNome()+ "###");
 		System.out.println();
 		System.out.println();
+		Atividades atividade = null;
 		Scanner sc = new Scanner(System.in);
 		if(usuario.getFuncao().equalsIgnoreCase("Professor") || usuario.getFuncao().equalsIgnoreCase("Pesquisador") ) {
 			//Tela do coordenador do projeto
@@ -197,10 +200,9 @@ public class Program {
 						+ "[2] EDITAR INFORMACOES DE PERFIL\n"
 						+ "[3] CRIAR PROJETO\n"
 						+ "[4] MEUS PROJETOS\n"
-						+ "[5] STATUS DE PROJETOS\n"
-						+ "[6] BOLSAS\n"
-						+ "[7] APAGAR MEU PERFIL\n"
-						+ "[8] VOLTAR\n");
+						+ "[5] BOLSAS\n"
+						+ "[6] APAGAR MEU PERFIL\n"
+						+ "[7] VOLTAR\n");
 				opt = sc.nextInt();
 				switch(opt) {
 				
@@ -466,20 +468,87 @@ public class Program {
 							
 							break; // fim de editar projeto #########################################################################################
 							
-						case 3:
-							;
-							break;
+						case 3: // nova atividade ###################################################################################################
+							System.out.println("NOVA ATIVIDADE");
+							System.out.println("DIGITE O ID DA ATIVIDADE:");
+							sc.nextLine();
+							String idAtv = sc.nextLine();
+							System.out.println("DIGITE A DESCRICAO DA ATIVIDADE:");
+							String descricaoAtv = sc.nextLine();
+							System.out.println("DIGITE A DATA DE INICIO DA ATV:");
+							String dataInicioAtv = sc.nextLine();
+							System.out.println("DIGITE A HORA DE INICIO DA ATV:");
+							String horaInicioAtv = sc.nextLine();
+							System.out.println("DIGITE A DATA DE FIM DA ATV:");
+							String dataFimAtv = sc.nextLine();
+							System.out.println("DIGITE A HORA DE fim DA ATV:");
+							String horaFimAtv = sc.nextLine();
+							atividade = new Atividades(idAtv, descricaoAtv, dataInicioAtv, dataFimAtv, horaInicioAtv, horaFimAtv );
+							System.out.println("DIGITE o email do responsavel:");
+							String email = sc.nextLine();
+							usuario = projeto.buscaUsuario(email);
+							//if(usuario != null) {
+							//atividade.setResponsavel(usuario);
+							//}
+							System.out.println(usuario.getEmail());
+							projeto.adcAtividade(atividade);
+							System.out.println("ATIVIDADE CRIADA COM SUCESSO");	
 							
-						case 4:
-							break;
+							break; // FIM DE CRIAR ATIVIDADE ########################################################################################
 							
-						case 5:
+						case 4: // apagar projeto ####################################################################################################
+							System.out.println("Tem certeza que deseja apagar o projeto?");
+							System.out.println("[1] Sim");
+							System.out.println("[2] Nao");
+							int numero = sc.nextInt();
+							if(numero == 1) {
+								listProjeto.remove(projeto);
+								usuario.setProjetoVinculado(null);
+								System.out.println("O Projeto foi excluido");
+								opt2 = 0;
+							}
+							break; // fim de apagar projeto #########################################################################################
+							
+						case 5: // ver atividades
+							System.out.println("ATIVIDADES");
+							for(Atividades ativ : projeto.atividade) {
+								System.out.println();
+								System.out.printf("ID: %s\n", ativ.getId());
+								System.out.printf("DATA COMECO: %s\n", ativ.getDataComeco());
+								System.out.printf("DATA FIM: %s\n", ativ.getDataFim());
+								System.out.printf("DESCRICAO: %s\n", ativ.getDescricao());
+								System.out.println();
+							}
+							
 							break;
 							
 						case 6:
 							break;
 							
 						case 7:
+							System.out.println("################################RELATORIO###################################");
+							System.out.println("---------------------------------Informacoes do projeto:---------------------------------");
+							System.out.println();
+							System.out.println(projeto.getId());
+							System.out.println(projeto.getDescricao());
+							System.out.println(projeto.getDataComeco());
+							System.out.println(projeto.getHoraComeco());
+							System.out.println(projeto.getDataFim());
+							System.out.println(projeto.getHoraFim());
+							System.out.println(projeto.getStatus());
+							System.out.println(projeto.getValorBolsa());
+							System.out.println(projeto.getCoordenador().getNome());
+							System.out.println("--------------------------------------------------------------------------------------------");
+							System.out.println("---------------------------------Informacoes das atividades:---------------------------------");
+							for(Atividades ativ : projeto.atividade) {
+								System.out.println();
+								System.out.printf("ID: %s\n", ativ.getId());
+								System.out.printf("DATA COMECO: %s\n", ativ.getDataComeco());
+								System.out.printf("DATA FIM: %s\n", ativ.getDataFim());
+								System.out.printf("DESCRICAO: %s\n", ativ.getDescricao());
+								System.out.println();
+							}
+							
 							break;
 							
 						case 8:
@@ -490,9 +559,28 @@ public class Program {
 						
 					}
 					
-					
-					
 					break;
+					
+				case 5: // bolsas #########################################################
+					for(Usuario usu : usuario.getProjetoVinculado().profissionaisDoProjeto){
+			            usu.setSaldo(usu.getProjetoVinculado().getValorBolsa());
+			        }
+					break; // fim de bolsas
+					
+				case 6: // excluir usuario
+					System.out.println("Tem certeza que deseja excluir o perfil?");
+					System.out.println("[1] sim");
+					System.out.println("[2] nao");
+					int numero1 = sc.nextInt();
+					if(numero1 == 1) {
+						listUsuario.remove(usuario);
+						opt = 0;
+					}
+					return 1;
+					
+				case 7:
+					opt = 0;
+					return 1;
 					
 							
 				}
@@ -500,11 +588,173 @@ public class Program {
 			}
 			
 		}
-		else
+		else // coodigo pra usuario sem  sercoordenador do projeto ###################################################################################
 		{
+			int opt = 1;
+			while(opt!=0) {
+				
+				System.out.printf("[1] VISUALIZAR MINHAS INFORMACOES\n"
+						+ "[2] EDITAR MINHAS INFORMACOES\n"
+						+ "[3] ENTRAR EM PROJETO\n"
+						+ "[4] APAGAR MEU PERFIL\n"
+						+ "[5] RETORNAR\n"
+						);
+				int var = sc.nextInt();
+				switch(var) {
+				case 1:
+					System.out.println("Nome: "+ usuario.getNome());
+					System.out.println(usuario.getFuncao());
+					System.out.println("Email: "+ usuario.getEmail());
+					System.out.println("Saldo: "+ usuario.getSaldo());
+					System.out.println();
+					break;
+					
+				case 2: // NAO SE PERDE  EDITANDO ##########################################################################
+					
+					int optt = 1;
+					
+					while(optt != 0) {
+						System.out.printf("EDITAR INFORMACOES DE PERFIL\n"
+								+ "ESCOLHA A OPCAO QUE DESEJA EDITAR\n");
+						
+						System.out.printf("[1] NOME\n"
+								+ "[2] EMAIL\n"
+								+ "[3] SENHA\n"
+								+ "[4] FUNCAO\n"
+								+ "[5] RETORNAR PARA PAGINA ANTERIOR\n");
+						
+						optt = sc.nextInt();
+						
+						switch(optt) {
+						
+						case 1:
+							sc.nextLine();
+							System.out.println("Digite o novo nome: ");
+							String novoNome = sc.nextLine();
+							usuario.setNome(novoNome);
+							System.out.println("EDICAO REALIZADA COM SUCESSO");
+							break;
+							
+						case 2:
+							sc.nextLine();
+							System.out.println("Digite o novo endereco de email: ");
+							String novoEmail = sc.nextLine();
+							usuario.setEmail(novoEmail);
+							System.out.println("EDICAO REALIZADA COM SUCESSO");
+							break;
+							
+						case 3:
+							sc.nextLine();
+							System.out.println("Digite uma nova senha: ");
+							String novaSenha = sc.nextLine();
+							usuario.setSenha(novaSenha);
+							System.out.println("EDICAO REALIZADA COM SUCESSO");
+							break;
+							
+						case 4:
+							System.out.println("ESCOLHA UMA DAS FUNCOES: ");
+							System.out.printf(
+									"[1] GRADUACAO\n"
+									+ "[2] MESTRADO\n"
+									+ "[3] DOUTORADO\n"
+									+ "[4] PROFESSOR\n"
+									+ "[5] PESQUISADOR\n"
+									+ "[6] DESENVOLVEDOR\n"
+									+ "[7] TESTADOR\n"
+									+ "[8] ANALISTA\n"
+									+ "[9] TECNICO\n");
+							int funcao = sc.nextInt();
+							String varOpFuncao = null;
+							
+							switch(funcao) {
+											
+											case 1:
+												varOpFuncao = "Graduacao";
+												break;
+												
+											case 2:
+												varOpFuncao = "Mestrado";
+												break;
+												
+											case 3:
+												varOpFuncao = "Doutorado";
+												break;
+												
+											case 4:
+												varOpFuncao = "Professor";
+												break;
+												
+											case 5:
+												varOpFuncao = "Pesquisador";
+												break;
+											
+											case 6:
+												varOpFuncao = "Desenvolvedor";
+												break;
+												
+											case 7:
+												varOpFuncao = "Testador";
+												break;
+												
+											case 8:
+												varOpFuncao = "Analista";
+												break;
+												
+											case 9:
+												varOpFuncao = "Tecnico";
+												break;
+											}
+							usuario.setFuncao(varOpFuncao);		
+							break;
+							
+						case 5:
+							optt = 0;
+							break;
+						}
+					}
+					
+					break;// NAO SE PERDE  FIM EDITANDO ##########################################################################
+					
+				case 3: // ####################ENTRAR EM PROJETO ##################
+					sc.nextLine();
+					System.out.println("Digite o id do projeto:");
+					String idProjeto = sc.nextLine();
+					projeto = achaProjeto(idProjeto, listProjeto);
+					if(projeto == null) {
+						System.out.println("O id esta errado");
+					}
+					else
+					{
+						usuario.setProjetoVinculado(projeto);
+						System.out.println("ADICIONADO COM SUCESSO");
+					}
+					break; // ################ FIM DE ENTRAR EM PROJETO #######################
+					
+				case 4:
+					listUsuario.remove(usuario);
+					opt = 0;
+					break;
+					
+				case 5:
+					opt = 0;
+					break;
+					
+				}
+				
+			}
 			
 		}
 		sc.close();
+		return 1;
+	}
+	
+	public static Projeto achaProjeto(String idProjeto, List<Projeto> listProjeto) {
+		for(Projeto projeto : listProjeto) {
+			if(projeto.getId().equalsIgnoreCase(idProjeto)) {
+				return projeto;
+			}
+		}
+		return null;
 	}
 	
 }

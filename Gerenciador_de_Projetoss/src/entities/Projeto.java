@@ -10,10 +10,11 @@ public class Projeto {
 	private String horaComeco;
 	private String horaFim;
 	private Usuario coordenador;
-	private ArrayList<Usuario> profissionaisDoProjeto;
+	public ArrayList<Usuario> profissionaisDoProjeto;
 	private double valorBolsa;
 	private String periodoBolsa;
 	private String status;
+	public ArrayList<Atividades> atividade;
 	
 	public Projeto() {
 		
@@ -30,6 +31,7 @@ public class Projeto {
 		this.valorBolsa = valorBolsa;
 		profissionaisDoProjeto = new ArrayList<>();
 		this.status = "Em processo de criacao";
+		atividade = new ArrayList<>();
 	}
 
 	public String getId() {
@@ -127,8 +129,18 @@ public class Projeto {
 		return status;
 	}
 	
+	public void adcAtividade(Atividades atividade) {
+		this.atividade.add(atividade);
+	}
 	
-	
+	public Usuario buscaUsuario(String email){
+        for(Usuario usuario : profissionaisDoProjeto){
+            if(usuario.getEmail().equalsIgnoreCase(email)){
+                return usuario;
+            }
+        }
+        return null;
+    }
 	
 	
 }

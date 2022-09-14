@@ -9,6 +9,8 @@ public class Usuario {
 	boolean ehCoordenador;
 	boolean ehVinculadoProjeto;
 	Projeto projetoVinculado;
+	Atividades atividadeVinculada;
+	double saldo;
 	
 	public Usuario() {
 		
@@ -19,6 +21,8 @@ public class Usuario {
 		this.senha = senha;
 		this.nome = nome;
 		this.funcao = funcao;
+		this.projetoVinculado = null;
+		this.saldo = 0;
 	}
 
 	public String getEmail() {
@@ -65,7 +69,7 @@ public class Usuario {
 		return ehVinculadoProjeto;
 	}
 	
-	public void setEhVinculador(boolean ehVinculadoPorjeto) {
+	public void setEhVinculador(boolean ehVinculadoProjeto) {
 		this.ehVinculadoProjeto = ehVinculadoProjeto;
 	}
 	
@@ -77,6 +81,23 @@ public class Usuario {
 	        this.projetoVinculado.adcUsuario(this);
 	        setEhVinculador(true);
 	    }
+	 
+	 public Atividades getAtividadeVinculada() {
+		 return atividadeVinculada;
+	 }
+	 
+	 public void setAtividadeVinculada(Atividades atividadeVinculada) {
+		 this.atividadeVinculada.addProfissional(this);;
+	 }
+	 
+	 public double getSaldo() {
+		 return saldo;
+	 }
+	 
+	 public void setSaldo(double saldo) {
+		 this.saldo= saldo;
+	 }
+	 
 
 	
 }
