@@ -49,6 +49,11 @@ Inversion of control consiste em retirar da classe a responsabilidade de instân
 ###### observe que em pagamentos eu não preciso instanciar taxaParaEstudantes, pois isso já acontece na hora de fazer o pagamento em projeto:
 ![image](https://user-images.githubusercontent.com/83170114/206166923-ca86f151-fddd-4e57-9ad1-d716d167e2ed.png)
 
+## Boas práticas:
+Além dos padrões inseridos, foi aplicado algumas outras práticas para facilitar uma possível manutenção no futuro, entre eles:
+###### Uso da nomeclatura Uppercase em todas as classes;
+###### Correção de warnings que poderiam a dar algum erro;
+
 
 
 
