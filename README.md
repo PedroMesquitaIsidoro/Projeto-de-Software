@@ -8,6 +8,19 @@
  ###### exceptions - Terceira versão (aplicando exceptions)
  ###### padrões - Quarta versão (Padrões de projeto)
  
+ ## Como rodar o programa?
+ É só executar Program.java em application
+ 
+ ## Funcionalidades:
+ 
+ ### Antes de logar:
+ ###### Criar novo usuário
+ ###### Login
+ ###### Encerrar o Programa
+ 
+  ### Logado:
+  ###### Todas as variações de funcionalidades relacionadas a projetos, atividades, usuários e pagamentos. Lembrando que criações projetos, alterações de status e realizações de pagamentos só podem ser realizadas por Professores e Pesquisadores.
+
  # CODE SMELLS
  
  identificando smells no código:
@@ -17,8 +30,10 @@
   
  #### 2 - Long Method
     Solução: Com a finalidade de reduzir o tamanho de linhas dos métodos, alguns deles foram movidos para os objetos que são referentes a eles próprios.
-    
-    
+  
+ ## Tratamento de excessões
+ ###### O programa não é interrompido caso o usuário insira um char ou número em locais inapropriados, é devolvida uma mensagem informando que a entrada está incorreta;
+  
  ## Padrões inseridos: 
  
  ### Builder
