@@ -64,8 +64,12 @@ Inversion of control consiste em retirar da classe a responsabilidade de instân
 ###### observe que em pagamentos eu não preciso instanciar taxaParaEstudantes, pois isso já acontece na hora de fazer o pagamento em projeto:
 ![image](https://user-images.githubusercontent.com/83170114/206166923-ca86f151-fddd-4e57-9ad1-d716d167e2ed.png)
 
+### Extract Class
+Anteriormente a classe Funcionalidades realizava muitos métodos, muitos métodos que são relacionados a outras classes. Sendo assim, com a finalidade de reduzir o tamanho criamos classes que são responsáveis pelos métodos que são relevantes para elas mesmo. Logo, surgiram todas as classes da pasta functions, que são classes relacionadas a realizar métodos para interações de atividades, projetos, usuário, login e pagamentos.
+
+
 ## Boas práticas:
-Além dos padrões inseridos, foi aplicado algumas outras práticas para facilitar uma possível manutenção no futuro, entre eles:
+Além dos padrões inseridos, foram aplicados algumas outras práticas para facilitar uma possível manutenção no futuro, entre eles:
 ###### Uso da nomeclatura Uppercase em todas as classes;
 ###### Correção de warnings que poderiam a dar algum erro;
 
